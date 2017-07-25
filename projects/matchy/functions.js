@@ -49,8 +49,8 @@
 //////////////////////////////////////////////////////////////////////
 
     function add(animals, animal) {
-        var exists = search(animals, animal);
-        if (exists === null) {
+       var exists = search(animals, animal.name);
+        if (exists === null && animal.name.length > 0 && animal.species.length > 0) {
             animals.push(animal);
         }
     }
