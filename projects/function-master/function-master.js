@@ -45,36 +45,30 @@ function capitalizeWord(word) {
 
 // 6. capitalizeAllWords test
 function capitalizeAllWords(string) {
-    var collection = [];
+    var collection = string.split(' ');
+     for (var i = 0; i < collection.length; i++) {
+         collection[i] = collection[i].charAt(0).toUpperCase() + collection[i].substring(1);
+     }
+    return collection.join(' ');
 }
 
 // 7. welcomeMessage test
 function welcomeMessage(object) {
-    for (var name in object) {
-    return "Welcome " + (object[name].charAt(0).toUpperCase() + name.slice(1)) + "!"
-    }
+        var capitalizeMe = object.name.charAt(0).toUpperCase() + object.name.slice(1)
+        return "Welcome " + capitalizeMe + "!"
 }
 
 // 8. profileInfo test
 function profileInfo(object) {
-    var collection = [];
-    for (var key in object) {
-        collection.push(object[key])
-    }
-    for (var i = 0; i < collection.length; i++) {
-        collection[i].charAt(0).toUpperCase() + collection[i].slice(1)
-    }
-    return collection[0] + ' is a ' + collection[1];
+    var capitalizeName = object.name.charAt(0).toUpperCase() + object.name.slice(1)
+    var capitalizeSpecies = object.species.charAt(0).toUpperCase() + object.species.slice(1)
+    return capitalizeName + ' is a ' + capitalizeSpecies;
 }
 
 // 9. maybeNoises test
 function maybeNoises(object) {
-    var collection = [];
-    for (var key in object){
-        collection.push(object[key]);
-    }
-    if (collection !== null) {
-        return collection.join(" ");
+    if (object.hasOwnProperty('noises') === true && object.noises.length > 0) {
+        return object.noises.join(' ');
     } else {
       return 'there are no noises';
       }
@@ -91,8 +85,59 @@ function hasWord(string, word) {
 }
 
 // 11. addFriend test
-function addFriend(object, name) {
-    for (var friends in object) {
-        return object[friends] = name;
+function addFriend(name, object) {
+    object.friends.push(name);
+    return object;
+}
+
+
+// 12. isFriend test
+function isFriend(name, object) {
+    if (name === object.friends && object.hasOwnProperty('friends') === true && object.friends.length > 0) {
+        return true;
+    } return false;
+}
+
+// 13. nonFriends test
+function nonFriends(name, list) {
+    var notFriends = [];
+    for (var i = 0; i < list.length; i++) {
+        if (list !== null && name.friends !== list[i]) {
+            notFriends.push(list[i]);
+        }
     }
+    return notFriends;
+}
+
+// 14. updateObject test
+function updateObject(object, key, value) {
+    if (object[key] !== null) {
+        object[key] = value
+    } else if (object[key] === null) {
+        object[key] = value
+    } return object;
+}
+
+// 15. removeProperties test
+function removeProperties(object, array) {
+    for (var i = 0; i < array.length; i++) {
+        for (var key in object) {
+            if (key === array[i]) {
+                delete object[key];
+            }
+        }
+    } return object;
+}
+
+// 16. dedup test
+function dedup(data) {
+    var duplicates = [];
+    var newArray = [];
+    for (var i = 0; i < data.length; i++) {
+        if (!(data[i] in duplicates)) {
+            newArray.push(data[i]);
+            duplicates[data[i]] = true;
+        }
+    }
+    return newArray;
 }
