@@ -93,20 +93,24 @@ function addFriend(name, object) {
 
 // 12. isFriend test
 function isFriend(name, object) {
-    if (name === object.friends && object.hasOwnProperty('friends') === true && object.friends.length > 0) {
+    if (!(object.hasOwnProperty('friends'))) {
+        return false;
+    } else if (object.friends.indexOf(name) >= 0) {
         return true;
-    } return false;
+    } else if (object.friends.indexOf(name) <= 0) {
+        return false;
+    }
 }
 
 // 13. nonFriends test
-function nonFriends(name, list) {
-    var notFriends = [];
-    for (var i = 0; i < list.length; i++) {
-        if (list !== null && name.friends !== list[i]) {
-            notFriends.push(list[i]);
-        }
+function nonFriends(name, friends) {
+  var result = [];
+  for (var i = 0; i < friends.length; i++) {
+    if (!isFriend(name, friends[i]) && friends[i].name !== name) {
+      result.push(friends[i].name);
     }
-    return notFriends;
+  }
+  return result;
 }
 
 // 14. updateObject test

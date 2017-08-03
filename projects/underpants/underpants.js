@@ -295,7 +295,7 @@ _.unique = function(array) {
 
 _.map = function(collection, action) {
     let newArray = [];
-    _.filter(collection, function(element, i, array){
+    _.each(collection, function(element, i, array){
         newArray.push(action(element, i, array));
     });
     return newArray;
@@ -360,6 +360,33 @@ _.contains = function(array, value) {
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function (collection, action) {
+    //check if array or object
+    //loop over collection
+    //call function for every element
+    //if return value of calling function for every element is true (action's truthy), return true
+    //if the function ever returns false, return false
+    //if there is no function, return true if all elements are truthy, otherwise return false
+
+ if (action === undefined) {
+        let resultWithNoFunction = true;
+        _.each(collection, function(element, i, collection) {
+            if (element === null || element === undefined || element === NaN || element === '' || element === 0) {
+                resultWithNoFunction = false;
+            }
+        });
+        return resultWithNoFunction;
+    } else {
+        let resultWithFunction = true;
+        _.each(collection, function(element, i, collection) {
+            if (!action(element, i, collection)) {
+                resultWithFunction = false;
+            }
+        });
+        return resultWithFunction;
+    }
+}
+
 
 /** _.some()
 * Arguments:
@@ -382,6 +409,27 @@ _.contains = function(array, value) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, action) {
+
+    if (action === undefined) {
+        let resultWithNoFunction = true;
+        _.each(collection, function(element, i, collection) {
+            if (element === null || element === undefined || element === '' || element === 0 || element === NaN) {
+                resultWithNoFunction = false;
+            }
+        });
+        return resultWithNoFunction;
+    } else {
+        let resultWithFunction = false;
+        _.each(collection, function(element, i, collection) {
+            if (action(element, i, collection)) {
+                resultWithFunction = true;
+            }
+        });
+        return resultWithFunction;
+    }
+}
+
 
 /** _.reduce()
 * Arguments:
@@ -402,6 +450,24 @@ _.contains = function(array, value) {
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 
+_.reduce = function(array, action, seed) {
+   if (seed === undefined) {
+       seed = array[0]
+        _.each(array, function(element, i, array) {
+            if (seed === element) {
+                seed = action(seed, element, i, array) / seed
+            } else {
+                seed = action(seed, element, i, array)
+            }
+        });
+        return seed;
+   } else {
+       _.each(array, function(element, i, array) {
+          seed = action(seed, element, i, array) 
+       });
+        return seed;
+   }
+}
 
 /** _.extend()
 * Arguments:
@@ -418,6 +484,15 @@ _.contains = function(array, value) {
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
+_.extend = function(objectOne) {
+    var args = Array.from(arguments)
+    _.each(arguments, function(element, i, collection) {
+        for (var key in element) {
+            objectOne[key] = element[key]
+        }
+    });
+    return objectOne;
+}
 
 // This is the proper way to end a javascript library
 }());
