@@ -451,22 +451,30 @@ _.some = function(collection, action) {
 */
 
 _.reduce = function(array, action, seed) {
-   if (seed === undefined) {
-       seed = array[0]
-        _.each(array, function(element, i, array) {
-            if (seed === element) {
-                seed = action(seed, element, i, array) / seed
-            } else {
-                seed = action(seed, element, i, array)
-            }
-        });
-        return seed;
-   } else {
-       _.each(array, function(element, i, array) {
-          seed = action(seed, element, i, array) 
-       });
-        return seed;
-   }
+//   if (seed === undefined) {
+//       seed = array[0]
+//         _.each(array, function(element, i, array) {
+//             if (seed === element) {
+//                 seed = action(seed, element, i, array) / seed
+//             } else {
+//                 seed = action(seed, element, i, array)
+//             }
+//         });
+//         return seed;
+//   } else {
+//       _.each(array, function(element, i, array) {
+//           seed = action(seed, element, i, array) 
+//       });
+//         return seed;
+//   }
+    _.each(array, function(element, i, array) {
+       if (seed === undefined) {
+           seed = array[0]
+       } else {
+           seed = action(seed, element, i);
+       }
+    });
+    return seed;
 }
 
 /** _.extend()
