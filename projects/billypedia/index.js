@@ -121,13 +121,15 @@ $(document).ready(function() {
         let currentEvent = $(event.currentTarget);
         if (clickCountBilly < images.length) {
             currentEvent.fadeOut('fast', function() {
-                $('#image-billy').attr('src', images[clickCountBilly]);
+                $('#image-billy')
+                    .attr('src', images[clickCountBilly]);
             }).fadeIn('fast');
         }
         else {
             clickCountBilly = 0;
             currentEvent.fadeOut('fast', function() {
-                $('#image-billy').attr('src', images[clickCountBilly]);
+                $('#image-billy')
+                    .attr('src', images[clickCountBilly]);
             }).fadeIn('fast');
         }
     });
@@ -141,14 +143,16 @@ $(document).ready(function() {
     $('.top-rated-click-list').on('click', function(event) {
         let currentEvent = $(event.currentTarget);
         currentEvent.fadeOut('fast', function() {
-            $('#top-rated-art').attr('src', topRatedArtSelector[currentEvent.attr('id')].art);
+            $('#top-rated-art')
+                .attr('src', topRatedArtSelector[currentEvent.attr('id')].art);
         }).fadeIn('fast');
     });
     
     $('.general-recording-click-list').on('click', function(event) {
         let currentEvent = $(event.currentTarget);
         currentEvent.fadeOut('fast', function() {
-            $('#general-art').attr('src', generalArtSelector[currentEvent.attr('id')].art);
+            $('#general-art')
+                .attr('src', generalArtSelector[currentEvent.attr('id')].art);
         }).fadeIn('fast');
     });
 
@@ -157,6 +161,11 @@ $(document).ready(function() {
  *  TODO 9: Build a Table using jQuery
  * 
  */
+ 
+ 
+ 
+ 
+ 
         //$general.append($('<h2>').text('Recordings')).appendTo($('#sidebar'));
         
         // let $section = $('<section>').attr('id', 'section-rider');
