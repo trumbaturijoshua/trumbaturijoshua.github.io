@@ -19,8 +19,11 @@ $(document).ready(function() {
             'margin-top': '0px',
             'fontWeight' : 'bold'
             })
-            .text('Billy Higgins');
-        $('nav header').css({'margin': '10px'});
+            .text('Billypedia');
+        $('nav header')
+            .css({
+            'margin': '10px',
+            });
         $('body').css('background', '#5A7BAD');
         
 /**
@@ -162,19 +165,26 @@ $(document).ready(function() {
  * 
  */
  
- 
- 
- 
- 
-        //$general.append($('<h2>').text('Recordings')).appendTo($('#sidebar'));
-        
-        // let $section = $('<section>').attr('id', 'section-rider');
-        // $section.append($('<h3>').text('Billy\'s Rider')).appendTo($('#sections'));
-        
+    let $section = $('<section>').attr('id', 'section-rider');
+    $section.append($('<h3>').text('Billy\'s Rider')).appendTo($('#sections'));
 
-        
 
-        //$('<ol>').appendTo('.sidebar').attr('id', '.top-rated')
+    var createTable = function(rider) {
+        var createRow = function(rider) {
+            var $row = $('<tr>');
+            var $type = $('<td>').text(rider.type);
+            var $desc = $('<td>').text(rider.desc);
+            $row.append($type);
+            $row.append($desc);
+            return $row;
+        };
+    var $table = $('<table>');
+    var $rows = rider.map(createRow);
+    $table.append($rows);
+    return $table;
+    };
+    let rider = data.rider;
+    createTable(rider).appendTo('#section-rider');
         
         // YOUR CODE ABOVE HERE //
     })
